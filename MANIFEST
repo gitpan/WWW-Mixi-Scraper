@@ -1,0 +1,20 @@
+Changes
+lib/WWW/Mixi/Scraper.pm
+lib/WWW/Mixi/Scraper/Mech.pm
+lib/WWW/Mixi/Scraper/Plugin.pm
+lib/WWW/Mixi/Scraper/Plugin/ListComment.pm
+lib/WWW/Mixi/Scraper/Plugin/ListDiary.pm
+lib/WWW/Mixi/Scraper/Plugin/NewBBS.pm
+lib/WWW/Mixi/Scraper/Plugin/NewFriendDiary.pm
+lib/WWW/Mixi/Scraper/Plugin/ShowFriend.pm
+lib/WWW/Mixi/Scraper/Plugin/ShowLog.pm
+lib/WWW/Mixi/Scraper/Plugin/ViewBBS.pm
+lib/WWW/Mixi/Scraper/Plugin/ViewDiary.pm
+lib/WWW/Mixi/Scraper/Utils.pm
+Makefile.PL
+MANIFEST			This list of files
+README
+t/00_load.t
+t/99_pod.t
+t/99_podcoverage.t
+META.yml                                 Module meta-data (added by MakeMaker)
