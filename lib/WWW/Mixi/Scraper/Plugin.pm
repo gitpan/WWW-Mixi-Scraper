@@ -123,13 +123,16 @@ sub post_process {
     }
   }
 
-  $arrayref = [ grep { !$_->{_delete} } @{ $arrayref } ];
+  $arrayref = [ grep { %{ $_ } && !$_->{_delete} } @{ $arrayref } ];
 
   return $arrayref;
 }
 
 sub _extract_name {
   my $item = shift;
+
+  return unless defined $item->{string} && defined $item->{subject};
+
   my $name = substr( delete $item->{string}, length $item->{subject} );
      $name =~ s/^\s*\(//;
      $name =~ s/\)\s*$//;

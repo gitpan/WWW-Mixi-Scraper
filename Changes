@@ -1,5 +1,10 @@
 Revision history for WWW-Mixi-Scraper
 
+0.04  2007/07/03
+  - new plugin: NewVideo (by Tatsuhiko Miyagawa)
+  - some of the live tests spat warnings and/or failed
+    when the scraper returns nothing
+
 0.03  2007/07/02
   - now you can tweak_uri() built in the build_uri()
     e.g. to get contents from 'video.mixi.jp/view_video.pl'

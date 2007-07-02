@@ -9,7 +9,11 @@ my $dateformat = date_format('%Y-%m-%d %H:%M');
 run_tests('list_comment') or ok 'ignored';
 
 sub test {
-  foreach my $item ( $mixi->list_comment->parse(@_) ) {
+  my @items = $mixi->list_comment->parse(@_);
+
+  return ok 'skipped: no comments' unless @items;
+
+  foreach my $item ( @items ) {
     ok $item->{subject};
     ok $item->{name};
     ok $item->{time};

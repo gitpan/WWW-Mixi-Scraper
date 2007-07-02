@@ -10,7 +10,11 @@ my $mixi = login_to('list_message.pl');
 run_tests('list_message') or ok 'ignored';
 
 sub test {
-  foreach my $item ( $mixi->list_message->parse(@_) ) {
+  my @items = $mixi->list_message->parse(@_) ;
+
+  return ok 'skipped: no messages' unless @items;
+
+  foreach my $item ( @items ) {
     ok $item->{subject};
     ok $item->{name};
     ok $item->{time};

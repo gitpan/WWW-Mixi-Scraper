@@ -9,7 +9,11 @@ my $dateformat = date_format('%Y-%m-%d %H:%M');
 run_tests('new_bbs') or ok 'ignored';
 
 sub test {
-  foreach my $item ( $mixi->new_bbs->parse(@_) ) {
+  my @items = $mixi->new_bbs->parse(@_);
+
+  return ok 'skipped: no new bbs entries' unless @items;
+
+  foreach my $item ( @items ) {
     ok $item->{subject};
     ok $item->{name};
     ok $item->{time};

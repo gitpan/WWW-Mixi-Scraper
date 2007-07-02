@@ -9,7 +9,11 @@ my $mixi = login_to('list_diary.pl');
 run_tests('list_diary') or ok 'ignored';
 
 sub test {
-  foreach my $item ( $mixi->list_diary->parse(@_) ) {
+  my @items = $mixi->list_diary->parse(@_);
+
+  return ok 'skipped: no diary' unless @items;
+
+  foreach my $item ( @items ) {
     ok $item->{subject};
     ok $item->{description};
     ok $item->{time};

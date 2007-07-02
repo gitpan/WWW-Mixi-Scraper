@@ -10,12 +10,13 @@ my $dateformat = date_format('%Y-%m-%d');
 run_tests('show_calendar') or ok 'ignored';
 
 sub test {
-  my $calendar = $mixi->show_calendar->parse(@_);
+  my @items = $mixi->show_calendar->parse(@_);
 
-require Data::Dump;
-  foreach my $item ( @{ $calendar } ) {
+  return ok 'skipped: no calendar items' unless @items;
+
+  foreach my $item ( @items ) {
     ok $item->{subject};
-    ok $item->{link}, Data::Dump::dump($item);
+    ok $item->{link};
     ok ref $item->{link} && $item->{link}->isa('URI');
     ok $item->{name};
     ok $item->{time};

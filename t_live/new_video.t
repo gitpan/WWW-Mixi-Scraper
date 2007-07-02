@@ -3,15 +3,15 @@ use warnings;
 use Test::More qw(no_plan);
 use t_live::lib::Utils;
 
-my $mixi = login_to('new_friend_diary.pl');
+my $mixi = login_to('new_video.pl');
 my $dateformat = date_format('%Y-%m-%d %H:%M');
 
-run_tests('new_friend_diary') or ok 'ignored';
+run_tests('new_video') or ok 'ignored';
 
 sub test {
-  my @items = $mixi->new_friend_diary->parse(@_);
+  my @items = $mixi->new_video->parse(@_);
 
-  return ok 'skipped: no new diary entries' unless @items;
+  return ok 'skipped: no new videos' unless @items;
 
   foreach my $item ( @items ) {
     ok $item->{subject};

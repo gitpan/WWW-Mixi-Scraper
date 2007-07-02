@@ -9,7 +9,11 @@ my $dateformat = date_format('%Y-%m-%d %H:%M');
 run_tests('show_log') or ok 'ignored';
 
 sub test {
-  foreach my $item ( $mixi->show_log->parse(@_) ) {
+  my @items = $mixi->show_log->parse(@_);
+
+  return ok 'skipped: no logs' unless @items;
+
+  foreach my $item ( @items ) {
     ok $item->{time};
     my $dt = $dateformat->parse_datetime( $item->{time} );
     ok defined $dt;
