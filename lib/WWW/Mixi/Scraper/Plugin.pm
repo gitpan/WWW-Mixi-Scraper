@@ -70,6 +70,8 @@ sub build_uri {
     }
   }
 
+  $uri = $self->tweak_uri($uri) if $self->can('tweak_uri');
+
   return $uri;
 }
 
@@ -185,7 +187,7 @@ gets content from uri, scrape, and returns an array (or hash reference, etc) of 
 
 =head2 build_uri
 
-used internally to build uri from query paramters (and optional hash)
+used internally to build uri from query paramters (and optional hash). If you want to tweak the uri (e.g. to change authority from 'mixi.jp' to 'video.mixi.jp', etc), provide C<tweak_uri()> in your plugin.
 
 =head2 get_content
 

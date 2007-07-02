@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                WWW-Mixi-Scraper
-version:             0.02
+version:             0.03
 abstract:            yet another mixi scraper
 license:             perl
 generated_by:        ExtUtils::MakeMaker version 6.33

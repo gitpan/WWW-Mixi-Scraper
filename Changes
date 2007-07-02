@@ -1,5 +1,10 @@
 Revision history for WWW-Mixi-Scraper
 
+0.03  2007/07/02
+  - now you can tweak_uri() built in the build_uri()
+    e.g. to get contents from 'video.mixi.jp/view_video.pl'
+    (instead of 'mixi.jp/view_video.pl')
+
 0.02  2007/07/02
   - new plugins: ListMessage, ViewMessage, ShowCalendar
   - included several live tests
