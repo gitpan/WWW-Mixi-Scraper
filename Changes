@@ -1,5 +1,20 @@
 Revision history for WWW-Mixi-Scraper
 
+0.02  2007/07/02
+  - new plugins: ListMessage, ViewMessage, ShowCalendar
+  - included several live tests
+    (these won't be tested by normal make process and requires
+    extra modules not declared in Makefile.PL, such as YAML,
+    DateTime::Format::Strptime, File::Slurp, etc)
+  - now logs in just before it needs to get contents;
+    i.e. doesn't log in while testing with local files
+  - added Time::HiRes dependency to behave and not to
+    access too frequently.
+  - fixed _datetime() as some pages doesn't have date info.
+  - fixed validator() (actually, is_valid) not to spit errors
+    when it receives some undefined query parameters.
+    thanks to miyagawa.
+
 0.01  2007/06/04
   - initial release
 

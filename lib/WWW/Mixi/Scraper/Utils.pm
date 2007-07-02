@@ -25,14 +25,15 @@ sub _datetime {
   $string =~ s/^\s+//s;
   my ($date, $time, $dummy) = split /\s+/s, $string, 3;
 
-  unless ( defined $time ) {
-    warn "time is not defined"; return;
+  $date =~ s/\D/\-/g;
+  $date =~ s/\-+$//;
+
+  if ( $time ) {
+    $time =~ s/\D/:/g;
+    $time =~ s/:+$//;
   }
 
-  $date =~ s/\D/\-/g;
-  $date =~ s/\-$//;
-
-  return "$date $time";  # should be DateTime object?
+  return $time ? "$date $time" : $date; # should be DateTime object?
 }
 
 sub _uri {

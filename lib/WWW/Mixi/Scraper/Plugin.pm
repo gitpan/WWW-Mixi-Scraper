@@ -69,6 +69,7 @@ sub build_uri {
       $uri->query_param( $key => $query{$key} );
     }
   }
+
   return $uri;
 }
 
@@ -97,7 +98,7 @@ sub validator ($) {
   }
 
   no strict 'refs';
-  *{"$pkg\::_is_valid"} = sub { return $rules{$_[1]}->($_[2]) };
+  *{"$pkg\::_is_valid"} = sub { return $rules{$_[1]} && $rules{$_[1]}->($_[2]) };
 }
 
 sub post_process {
@@ -114,7 +115,7 @@ sub post_process {
       if ( $key =~ /time$/ ) {
         $item->{$key} = _datetime($item->{$key})
       }
-      if ( $key =~ /link$/ ) {
+      elsif ( $key =~ /(?:link|envelope|image|background|src|icon)$/ ) {
         $item->{$key} = _uri($item->{$key});
       }
     }

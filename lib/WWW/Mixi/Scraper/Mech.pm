@@ -6,37 +6,42 @@ use Encode;
 use WWW::Mechanize;
 use WWW::Mechanize::DecodedContent;
 use WWW::Mixi::Scraper::Utils qw( _uri );
+use Time::HiRes qw( sleep );
 
 sub new {
   my ($class, %options) = @_;
 
   my $email    = delete $options{email};
   my $password = delete $options{password};
+  my $next_url = delete $options{next_url};
 
   $options{agent} ||= "WWW-Mixi-Scraper/$WWW::Mixi::Scraper::VERSION";
   $options{cookie_jar} ||= {};
 
   my $mech = WWW::Mechanize->new( %options );
-  my $self = bless { mech => $mech }, $class;
-
-  if ( $email && $password ) {
-    $self->login( $email, $password );
-  }
+  my $self = bless {
+    mech  => $mech,
+    login => {
+      email    => $email,
+      password => $password,
+      next_url => $next_url,
+      sticky   => 'on',
+    }
+  }, $class;
 
   $self;
 }
 
 sub login {
-  my ($self, $email, $password) = @_;
+  my $self = shift;
 
-  $self->{mech}->post( 'http://mixi.jp/login.pl' => {
-    next_url => '/home.pl',
-    email    => $email,
-    password => $password,
-    sticky   => 'on',
-  });
+  sleep(0.1); # intentional delay not to access too frequently
+
+  $self->{mech}->post( 'http://mixi.jp/login.pl' => $self->{login} );
 
   $self->may_have_errors('Login failed');
+
+  warn "logged in to mixi";
 }
 
 sub logout {
@@ -66,7 +71,22 @@ sub get {
 
   $uri = _uri($uri) unless ref $uri eq 'URI';
 
+  sleep(0.1); # intentional delay not to access too frequently
+
   $self->{mech}->get($uri);
+
+  # adapted from Plagger::Plugin::CustomFeed::Mixi
+  if ( $self->content =~ /action="login\.pl"/ ) {
+    # shouldn't be path but path_query, obviously
+    $self->{login}->{next_url} = $uri->path_query;
+    $self->login;
+
+    # meta refresh
+    if ( $self->content =~ /"0;url=(.*?)"/ ) {
+      $self->{mech}->get($1);
+    }
+  }
+  $self->{mech}->success;
 }
 
 sub content {
@@ -114,7 +134,7 @@ Mainly used internally.
 
 =head2 new
 
-creates an object. Optional hash is passed to WWW::Mechanize, except for 'email' and 'password', which are used to login.
+creates an object. Optional hash is passed to WWW::Mechanize, except for 'email' and 'password' (and 'next_url'), which are used to login.
 
 =head2 get
 

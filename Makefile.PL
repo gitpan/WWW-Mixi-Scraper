@@ -12,6 +12,7 @@ WriteMakefile(
     'Module::Pluggable::Fast' => 0,
     'String::CamelCase' => 0,
     'Test::UseAllModules' => 0,
+    'Time::HiRes' => 0,
     'URI' => 0,
     'URI::QueryParam' => 0,
     'Web::Scraper' => 0,

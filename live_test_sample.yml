@@ -1,0 +1,39 @@
+global:
+  email: <your@email.address>
+  password: <your_password>
+  skip_remote: 1
+  test_html_dir: t_live/html
+
+tests:
+  list_comment:
+    - local: list_comment.html
+    - remote: -
+
+  list_diary:
+    - local: list_diary.html
+    - remote: -
+
+  list_message:
+    - local: list_message.html
+    - remote: -
+
+  new_friend_diary:
+    - local: new_friend_diary.html
+    - remote: -
+
+  new_bbs:
+    - local: new_bbs.html
+    - remote: -
+
+  show_friend:
+    - local: show_friend.html
+
+  show_log:
+    - local: show_log.html
+    - remote: -
+
+  view_bbs:
+    - local: view_bbs.html
+    - remote:
+        id: <id>
+        comm_id: <community_id>
