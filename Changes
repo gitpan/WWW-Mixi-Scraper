@@ -1,5 +1,9 @@
 Revision history for WWW-Mixi-Scraper
 
+0.05  2007/07/31
+  - applied patches from kazeburo
+    (http://blog.nomadscafe.jp/archives/000723.html)
+
 0.04  2007/07/03
   - new plugin: NewVideo (by Tatsuhiko Miyagawa)
   - some of the live tests spat warnings and/or failed

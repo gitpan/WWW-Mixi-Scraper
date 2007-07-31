@@ -23,7 +23,16 @@ sub _datetime {
   }
 
   $string =~ s/^\s+//s;
-  my ($date, $time, $dummy) = split /\s+/s, $string, 3;
+  my @string = split /\s+/s, $string;
+  my ($date, $time);
+  if ( $string[2] && $string[2] =~ /\d+:\d+/ ) {
+     $date = join "", @string[0,1];
+     $time = $string[2];
+  }
+  else {
+     $date = $string[0];
+     $time = $string[1];
+  }
 
   $date =~ s/\D/\-/g;
   $date =~ s/\-+$//;
