@@ -15,6 +15,14 @@ sub scrape {
   my ($self, $html) = @_;
 
   my %scraper;
+  $scraper{images} = scraper {
+    process 'a',
+      link => '@onClick';
+    process 'a>img',
+      thumb_link => '@src';
+    result qw( link thumb_link );
+  };
+
   $scraper{topic} = scraper {
     process 'table[bgcolor="#dfa473"]>tr>td[bgcolor="#ffd8b0"]',
       time => 'TEXT';
@@ -25,11 +33,18 @@ sub scrape {
       name_link => '@href';
     process 'table[bgcolor="#dfa473"]>tr>td[bgcolor="#ffffff"]>table[width="500"]>tr>td[class="h120"]',
       description => 'TEXT';
-    result qw( time subject description name name_link );
+    process 'table[bgcolor="#dfa473"]>tr>td[bgcolor="#ffffff"]>table[width="500"]>tr>td[class="h120"]>table>tr>td[valign="middle"]',
+      'images[]' => $scraper{images};
+    result qw( time subject description name name_link images );
   };
 
   # bbs topic is not an array
   my $stash = $self->post_process($scraper{topic}->scrape(\$html))->[0];
+
+  # XXX: this fails when you test with local files.
+  # However, this link cannot be extracted from the html,
+  # at least as of writing this. ugh.
+  $stash->{link} = $self->{uri};
 
   $scraper{comments} = scraper {
     process 'tr',
@@ -94,10 +109,17 @@ returns a hash reference such as
 
   {
     subject => 'title of the topic',
+    link => 'http://mixi.jp/view_bbs.pl?id=xxxx',
     time => 'yyyy-mm-dd hh:mm',
     name => 'originator of the topic',
     name_link => 'http://mixi.jp/show_friend.pl?id=xxxx',
     description => 'topic',
+    images => [
+      {
+        link => 'show_picture.pl?img_src=http://img1.mixi.jp/photo/xx/xx.jpg',
+        thumb_link => 'http://img1.mixi.jp/photo/xx/xx.jpg',
+      },
+    ],
     comments => [
       {
         name => 'commenter',

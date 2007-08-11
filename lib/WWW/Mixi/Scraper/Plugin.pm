@@ -72,6 +72,8 @@ sub build_uri {
 
   $uri = $self->tweak_uri($uri) if $self->can('tweak_uri');
 
+  $self->{uri} = $uri;  # preserve for later use.
+
   return $uri;
 }
 
@@ -120,12 +122,45 @@ sub post_process {
       elsif ( $key =~ /(?:link|envelope|image|background|src|icon)$/ ) {
         $item->{$key} = _uri($item->{$key});
       }
+      elsif ( $key eq 'images' ) {
+        $item->{$key} = _images($item->{$key});
+      }
     }
   }
 
   $arrayref = [ grep { %{ $_ } && !$_->{_delete} } @{ $arrayref } ];
 
   return $arrayref;
+}
+
+sub _images {
+  my $item = shift;
+
+  $item = [ $item ] unless ref $item;  # a thumbnail
+
+  my @images;
+  foreach my $i ( @{ $item || [] } ) {
+    next unless $item;
+    push @images, __images($i);
+  }
+  return \@images;
+}
+
+sub __images {
+  my $item = shift;
+  my ($link, $thumb);
+  unless ( ref $item eq 'HASH' ) {
+    $link = $thumb = $item;
+    $link  =~ s/s\.jpg$/\.jpg/;
+    $thumb =~ s/(?:[^s])\.jpg$/s\.jpg/;
+  }
+  else { 
+    $link  = $item->{link} || '';
+    $thumb = $item->{thumb_link};
+
+    if ( $link =~ /MM_openBrWindow\(\s*'([^']+)'/ ) { $link = $1; }
+  }
+  return { link => _uri($link), thumb_link => _uri($thumb) };
 }
 
 sub _extract_name {
@@ -186,7 +221,7 @@ creates an object.
 
 =head2 parse
 
-gets content from uri, scrape, and returns an array (or hash reference, etc) of data.
+gets content from a uri, scrapes, and returns an array (or a hash reference, etc) of data.
 
 =head2 build_uri
 

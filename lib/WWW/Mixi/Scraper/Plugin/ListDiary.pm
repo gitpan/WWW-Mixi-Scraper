@@ -15,6 +15,13 @@ sub scrape {
   my ($self, $html) = @_;
 
   my %scraper;
+  $scraper{meta} = scraper {
+    process 'a',
+      text => 'TEXT',
+      href => '@href';
+    result qw( text href );
+  };
+
   $scraper{diaries} = scraper {
     process 'td[nowrap]',
       time => 'TEXT';
@@ -23,7 +30,11 @@ sub scrape {
       subject => 'TEXT';
     process 'td[bgcolor="#FFFFFF"]>table[cellpadding="3"]>tr>td[class="h120"]',
       description => 'TEXT';
-    result qw( time link subject description );
+    process 'td[bgcolor="#FFFFFF"]>table[cellpadding="3"]>tr>td[class="h120"]>table>tr>td>a>img',
+      'images[]' => '@src';
+    process 'td[align="right"]>a',
+      'meta[]' => $scraper{meta};
+    result qw( time link subject description images meta );
   };
 
   $scraper{list} = scraper {
@@ -46,6 +57,15 @@ sub scrape {
     }
     elsif ( $item->{description} ) {
       $tmp->{description} = $item->{description};
+      $tmp->{images}      = $item->{images};
+    }
+    elsif ( $item->{meta} ) {
+      foreach my $meta ( @{ $item->{meta} || [] } ) {
+        if ( ($meta->{href} || '') =~ /#(?:write|comment)$/ ) {
+          my ($count) = $meta->{text} =~ /\((\d+)\)/;
+          $tmp->{count} = $count;
+        }
+      }
       push @diaries, $tmp;
     }
   }
@@ -75,10 +95,17 @@ returns an array reference of
     subject => 'title of the diary',
     link    => 'http://mixi.jp/view_diary.pl?id=xxxx&owner_id=xxxx',
     description => 'extract of the diary',
-    time    => 'mm-dd hh:mm',
+    time    => 'yyyy-mm-dd hh:mm',
+    count   => 'num of comments',
+    images  => [
+      {
+        link       => 'http://img.mixi.jp/xx/xx/xxx.jpg',
+        thumb_link => 'http://img.mixi.jp/xx/xx/xxxs.jpg',
+      },
+    ],
   }
 
-Number of comments and image-related info are not available right now.
+Images may be an blank array reference.
 
 =head1 AUTHOR
 

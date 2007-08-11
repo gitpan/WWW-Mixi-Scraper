@@ -3,7 +3,7 @@ package WWW::Mixi::Scraper;
 use strict;
 use warnings;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 use String::CamelCase qw( decamelize );
 use Module::Pluggable::Fast
@@ -88,7 +88,7 @@ This is yet another 'mixi' (the largest SNS in Japan) scraper, powered by Web::S
 
 WWW::Mixi::Scraper is also pluggable, so if you want to scrape something it can't handle now, add your WWW::Mixi::Scraper::Plugin::<PLfileBasenameInCamel>, and it'll work for you.
 
-=head1 DIFFERENCES BETWEEN THE TWO
+=head1 DIFFERENCES BETWEEN TWO
 
 WWW::Mixi has much longer history and is full-stack. The data it returns tends to be more complete, fine-tuned, and raw in many ways (including encoding). However, it tends to suffer from minor html changes as it heavily relies on regexes, and maybe it is too monolithic.
 

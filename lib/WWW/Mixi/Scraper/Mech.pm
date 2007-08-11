@@ -106,6 +106,11 @@ sub get_content {
   $content;
 }
 
+sub uri {
+  my $self = shift;
+  $self->{mech}->uri;
+}
+
 1;
 
 __END__
@@ -159,6 +164,10 @@ tries to log out from mixi.
 =head2 may_have_errors
 
 dies with error message and status code if something is wrong (this may change)
+
+=head2 uri
+
+shortcut for {mech}->uri.
 
 =head1 SEE ALSO
 

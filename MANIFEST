@@ -13,6 +13,7 @@ lib/WWW/Mixi/Scraper/Plugin/ShowFriend.pm
 lib/WWW/Mixi/Scraper/Plugin/ShowLog.pm
 lib/WWW/Mixi/Scraper/Plugin/ViewBBS.pm
 lib/WWW/Mixi/Scraper/Plugin/ViewDiary.pm
+lib/WWW/Mixi/Scraper/Plugin/ViewEvent.pm
 lib/WWW/Mixi/Scraper/Plugin/ViewMessage.pm
 lib/WWW/Mixi/Scraper/Utils.pm
 live_test_sample.yml
@@ -34,3 +35,6 @@ t_live/show_calendar.t
 t_live/show_friend.t
 t_live/show_log.t
 t_live/view_bbs.t
+t_live/view_diary.t
+t_live/view_event.t
+t_live/view_message.t

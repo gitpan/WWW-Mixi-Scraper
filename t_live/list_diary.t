@@ -24,7 +24,6 @@ sub test {
     ok $item->{link};
     ok ref $item->{link} && $item->{link}->isa('URI');
 
-if (0) {  # not yet implemented
     ok defined $item->{count};  # this may be 0
     foreach my $image ( @{ $item->{images} || [] } ) {
       ok $image->{link};
@@ -32,6 +31,5 @@ if (0) {  # not yet implemented
       ok $image->{thumb_link};
       ok ref $image->{thumb_link} && $image->{thumb_link}->isa('URI');
     }
-}
   }
 }

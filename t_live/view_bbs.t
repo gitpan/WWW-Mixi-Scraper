@@ -20,12 +20,13 @@ sub test {
   ok $bbs->{name_link};
   ok ref $bbs->{name_link} && $bbs->{name_link}->isa('URI');
 
-if (0) { # not yet implemented
-  ok $bbs->{link};
-  ok ref $bbs->{link} && $bbs->{link}->isa('URI');
-}
+  unless ( its_local ) {
+    ok $bbs->{link};
+    ok ref $bbs->{link} && $bbs->{link}->isa('URI');
+  }
+
   foreach my $comment ( @{ $bbs->{comments} || [] } ) {
-    ok $comment->{name};
+    ok defined $comment->{name};  # might be null string or zero
     ok $comment->{description};
     ok $comment->{time};
     my $dt = $dateformat->parse_datetime( $comment->{time} );

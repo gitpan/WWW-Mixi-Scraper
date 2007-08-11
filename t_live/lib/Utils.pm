@@ -10,9 +10,12 @@ use File::Spec;
 use HTTP::Cookies;
 use YAML;
 
-our @EXPORT = qw( login_to date_format run_tests );
+our @EXPORT = qw( login_to date_format run_tests its_local );
 
 my $conf = load_yaml('live_test.yml');
+my $local;
+
+sub its_local () { $local; }
 
 sub load_yaml {
   my $file = shift;
@@ -87,6 +90,8 @@ sub test_local {
   my $file = delete $options{file} or return;
   $options{html} = test_file($file) or return;
 
+  $local = 1;
+
   warn "local test";
 
   main::test(%options);
@@ -94,6 +99,8 @@ sub test_local {
 
 sub test_remote {
   return if $conf->{global}->{skip_remote};
+
+  $local = 0;
 
   warn "remote test";
 

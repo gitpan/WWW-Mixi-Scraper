@@ -37,3 +37,15 @@ tests:
     - remote:
         id: <id>
         comm_id: <community_id>
+
+  view_diary:
+    - local: view_diary.html
+    - remote:
+        id: <id>
+        owner_id: <owner_id>
+
+  view_message:
+    - local: view_message.html
+    - remote:
+        id: <id>
+        box: inbox

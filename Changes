@@ -1,5 +1,12 @@
 Revision history for WWW-Mixi-Scraper
 
+0.06  2007/08/11
+  - new plugin: ViewEvent
+  - several View... plugins return ->{link} and ->{images} properly
+  - requested uri is now preserved in plugin's $self->{uri}
+    for later use (and added ->uri shortcut to Mech.pm)
+  - ShowFriend returns outline info as well
+
 0.05  2007/07/31
   - applied patches from kazeburo
     (http://blog.nomadscafe.jp/archives/000723.html)
