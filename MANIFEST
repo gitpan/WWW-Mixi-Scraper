@@ -7,6 +7,7 @@ lib/WWW/Mixi/Scraper/Plugin/ListDiary.pm
 lib/WWW/Mixi/Scraper/Plugin/ListMessage.pm
 lib/WWW/Mixi/Scraper/Plugin/NewBBS.pm
 lib/WWW/Mixi/Scraper/Plugin/NewFriendDiary.pm
+lib/WWW/Mixi/Scraper/Plugin/NewMusic.pm
 lib/WWW/Mixi/Scraper/Plugin/NewVideo.pm
 lib/WWW/Mixi/Scraper/Plugin/ShowCalendar.pm
 lib/WWW/Mixi/Scraper/Plugin/ShowFriend.pm
@@ -30,6 +31,7 @@ t_live/list_diary.t
 t_live/list_message.t
 t_live/new_bbs.t
 t_live/new_friend_diary.t
+t_live/new_music.t
 t_live/new_video.t
 t_live/show_calendar.t
 t_live/show_friend.t

@@ -3,7 +3,7 @@ use warnings;
 use Test::More qw(no_plan);
 use t_live::lib::Utils;
 
-my $mixi = login_to('new_bbs.pl');
+my $mixi = login_to('new_music.pl');
 
 my $rules = {
   subject => 'string',
@@ -14,12 +14,12 @@ my $rules = {
 
 date_format('%Y-%m-%d %H:%M');
 
-run_tests('new_bbs') or ok 1, 'skipped: no tests';
+run_tests('new_music') or ok 1, 'skipped: no tests';
 
 sub test {
-  my @items = $mixi->new_bbs->parse(@_);
+  my @items = $mixi->new_music->parse(@_);
 
-  return ok 1, 'skipped: no new bbs entries' unless @items;
+  return ok 1, 'skipped: no new musics' unless @items;
 
   foreach my $item ( @items ) {
     matches( $item => $rules );
