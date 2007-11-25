@@ -3,7 +3,7 @@ package WWW::Mixi::Scraper;
 use strict;
 use warnings;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 use String::CamelCase qw( decamelize );
 use Module::Pluggable::Fast
@@ -23,7 +23,8 @@ sub new {
 
   my $self = bless { mech => $mech }, $class;
 
-  no strict 'refs';
+  no strict   'refs';
+  no warnings 'redefine';
   foreach my $plugin ( $class->plugins( mech => $mech, mode => $mode ) ) {
     my ($name) = decamelize(ref $plugin) =~ /(\w+)$/;
     $self->{$name} = $plugin;
