@@ -1,12 +1,15 @@
 --- #YAML:1.0
 name:                WWW-Mixi-Scraper
-version:             0.11
+version:             0.12
 abstract:            yet another mixi scraper
 license:             perl
-generated_by:        ExtUtils::MakeMaker version 6.36
+author:              
+    - Kenichi Ishigaki <ishigaki@cpan.org>
+generated_by:        ExtUtils::MakeMaker version 6.42
 distribution_type:   module
 requires:     
     Encode:                        0
+    Exporter:                      0
     Module::Pluggable::Fast:       0
     String::CamelCase:             0
     Test::UseAllModules:           0
@@ -17,7 +20,5 @@ requires:
     WWW::Mechanize:                1.30
     WWW::Mechanize::DecodedContent: 0
 meta-spec:
-    url:     http://module-build.sourceforge.net/META-spec-v1.2.html
-    version: 1.2
-author:
-    - Kenichi Ishigaki <ishigaki@cpan.org>
+    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
+    version: 1.3
