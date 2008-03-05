@@ -1,11 +1,11 @@
 --- #YAML:1.0
 name:                WWW-Mixi-Scraper
-version:             0.12
+version:             0.13
 abstract:            yet another mixi scraper
 license:             perl
 author:              
     - Kenichi Ishigaki <ishigaki@cpan.org>
-generated_by:        ExtUtils::MakeMaker version 6.42
+generated_by:        ExtUtils::MakeMaker version 6.44
 distribution_type:   module
 requires:     
     Encode:                        0
