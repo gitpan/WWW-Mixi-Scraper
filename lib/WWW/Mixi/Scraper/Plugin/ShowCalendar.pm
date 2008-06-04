@@ -23,26 +23,31 @@ sub scrape {
 
   my %scraper;
   $scraper{ym} = scraper {
-    process 'td[width=635]>b',
+    process 'div#calendarBox>div.heading02>h3',
       ym => 'TEXT';
     result qw( ym );
   };
   my $ym = $scraper{ym}->scrape(\$html);
+
   my ($year, $month) = $ym =~ /^(\d{4})\D+(\d{1,2})/;
 
   $scraper{day} = scraper {
-    process 'font[style]',
-      day => 'TEXT';
-    process 'img[align="middle"]',
-      'icons[]' => '@src';
-    process 'img[align="middle"]+a',
+    process 'td',
+      day => sub { $_->content and $_->content->[0] };
+    process 'ul>li',
+      'icons[]' => sub{
+         $_->parent()->attr('class') eq 'birthday' ?
+         'http://img.mixi.jp/img/calendaricon2/i_bd.gif' :
+         'http://img.mixi.jp/img/basic/icon/calendar_event001.gif' ;
+     }; # see http://mixi.jp/static/css/basic/home.css
+    process 'ul>li>a',
       'texts[]' => 'TEXT',
       'links[]' => '@href';
     result qw( day icons links texts );
   };
 
   $scraper{list} = scraper {
-    process 'table.calendarTable01>tr>td',
+    process 'div.calendarTable>table.calendar>tbody>tr>td', 
       'string[]' => $scraper{day};
     result qw( string );
   };
