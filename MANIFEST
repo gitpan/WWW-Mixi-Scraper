@@ -26,6 +26,7 @@ t/00_load.t
 t/99_pod.t
 t/99_podcoverage.t
 t_live/lib/Utils.pm
+t_live/list_bookmark.t
 t_live/list_comment.t
 t_live/list_diary.t
 t_live/list_message.t
