@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                WWW-Mixi-Scraper
-version:             0.15
+version:             0.16
 abstract:            yet another mixi scraper
 license:             perl
 author:              
