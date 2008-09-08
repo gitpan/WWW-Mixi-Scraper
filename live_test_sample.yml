@@ -17,6 +17,11 @@ tests:
     - local: list_diary.html
     - remote: -
 
+  list_echo:
+    - local: list_echo.html
+    - remote: 
+        id: <id>
+
   list_message:
     - local: list_message.html
     - remote: -
@@ -37,6 +42,14 @@ tests:
     - local: new_video.html
     - remote: -
 
+  recent_echo:
+    - local: recent_echo.html
+    - remote: -
+
+  res_echo:
+    - local: res_echo.html
+    - remote: -
+
   show_friend:
     - local: show_friend.html
 
@@ -55,6 +68,12 @@ tests:
     - remote:
         id: <id>
         owner_id: <owner_id>
+
+  view_echo:
+    - local: view_echo.html
+    - remote: 
+        id: <id>
+        post_time: <post_time>
 
   view_message:
     - local: view_message.html
