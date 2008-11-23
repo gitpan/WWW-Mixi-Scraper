@@ -1,24 +1,30 @@
 --- #YAML:1.0
-name:                WWW-Mixi-Scraper
-version:             0.19
-abstract:            yet another mixi scraper
-license:             perl
-author:              
+name:               WWW-Mixi-Scraper
+version:            0.20
+abstract:           yet another mixi scraper
+author:
     - Kenichi Ishigaki <ishigaki@cpan.org>
-generated_by:        ExtUtils::MakeMaker version 6.44
-distribution_type:   module
-requires:     
-    Encode:                        0
-    Exporter:                      0
-    Module::Pluggable::Fast:       0
-    String::CamelCase:             0
-    Test::UseAllModules:           0
-    Time::HiRes:                   0
-    URI:                           0
-    URI::QueryParam:               0
-    Web::Scraper:                  0.17
-    WWW::Mechanize:                1.30
-    WWW::Mechanize::DecodedContent: 0
+license:            perl
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
+requires:
+    Encode:               0
+    Exporter:             0
+    Module::Pluggable::Fast:  0
+    String::CamelCase:    0
+    Test::UseAllModules:  0.09
+    Time::HiRes:          0
+    URI:                  0
+    URI::QueryParam:      0
+    Web::Scraper:         0.17
+    WWW::Mechanize:       1.30
+    WWW::Mechanize::DecodedContent:  0.02
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.48
 meta-spec:
-    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
-    version: 1.3
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
