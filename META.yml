@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               WWW-Mixi-Scraper
-version:            0.20
+version:            0.21
 abstract:           yet another mixi scraper
 author:
     - Kenichi Ishigaki <ishigaki@cpan.org>
@@ -11,7 +11,7 @@ configure_requires:
 requires:
     Encode:               0
     Exporter:             0
-    Module::Pluggable::Fast:  0
+    Module::Find:         0
     String::CamelCase:    0
     Test::UseAllModules:  0.09
     Time::HiRes:          0
