@@ -22,7 +22,7 @@ my %params = (
   LICENSE => 'perl',
   META_MERGE => {
     resources => {
-      repository => 'http://svn.coderepos.org/share/lang/perl/WWW-Mixi-Scraper/',
+      repository => 'http://github.com/charsbar/www-mixi-scraper/',
     },
   },
 );

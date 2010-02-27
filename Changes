@@ -1,5 +1,8 @@
 Revision history for WWW-Mixi-Scraper
 
+0.27  2010/02/27
+  - forgot to fix metadata
+
 0.26  2010/02/27
   - deprecated NewMusic plugin
   - fixed broken ListDiary, NewFriendDiary, ViewDiary, ViewEcho
