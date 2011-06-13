@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               WWW-Mixi-Scraper
-version:            0.30
+version:            0.31
 abstract:           yet another mixi scraper
 author:
     - Kenichi Ishigaki <ishigaki@cpan.org>
