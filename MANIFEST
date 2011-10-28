@@ -52,3 +52,4 @@ t_live/view_diary.t
 t_live/view_echo.t
 t_live/view_event.t
 t_live/view_message.t
+META.json                                Module JSON meta-data (added by MakeMaker)

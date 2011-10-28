@@ -40,7 +40,7 @@ sub login {
 
   $self->may_have_errors('Login failed');
 
-  warn "logged in to mixi";
+  # warn "logged in to mixi";
 }
 
 sub logout {
@@ -75,7 +75,7 @@ sub get {
   $self->{mech}->get($uri);
 
   # adapted from Plagger::Plugin::CustomFeed::Mixi
-  if ( $self->content =~ /action="\/?login\.pl/ ) {
+  if ( $self->content =~ /action="(http:\/\/mixi\.jp)?\/?login\.pl/ ) {
     # shouldn't be path but path_query, obviously
     $self->{login}->{next_url} = $uri->path_query;
     $self->login;
